@@ -36,7 +36,7 @@ public class DatabaseTest {
         double result = instance.fetchInspection(vehicle);
         assertEquals(expResult, result, 0.0);
     }
-
+    //the next inspection at this point in time is the "check oil" inspection
     @Test
     public void testFetchInspectionChecklist() {
         System.out.println("fetchInspectionChecklist");
@@ -54,13 +54,13 @@ public class DatabaseTest {
         String result = instance.saveCurrentResult("check lights");
         assertEquals(expResult, result);
     }
-    //note that in this test we are expecting a null response
-    //because the vehicle in question has not yet begun going through the list of
-    //inspections so therefore it will be null
     @Test
     public void testCollectFinalResults() {
         System.out.println("collectFinalResults");
-        String expResult = null;
+        instance.saveCurrentResult("check oil");
+        instance.saveCurrentResult("check windows");
+        instance.saveCurrentResult("check lights");
+        String expResult = "[check oil PASS, check windows PASS, check lights PASS]";
         String result = instance.collectFinalResults(vehicle);
         assertEquals(expResult, result);
     }   
