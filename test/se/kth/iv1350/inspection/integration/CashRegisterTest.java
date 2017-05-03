@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package se.kth.iv1350.inspection.integration;
 
 import org.junit.After;
@@ -12,52 +8,40 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Michael
- */
+
 public class CashRegisterTest {
+    public CashRegister instance;
     
     public CashRegisterTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
+        instance = new CashRegister();
     }
     
     @After
     public void tearDown() {
+        instance = null;
     }
-
     @Test
     public void testUpdateCash() {
         System.out.println("updateCash");
-        double cost = 0.0;
-        CashRegister instance = new CashRegister();
+        double oldvalue= instance.cashInRegister;
+        double cost = 0;
         instance.updateCash(cost);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double result = instance.cashInRegister;
+        double expResult = oldvalue + cost;
+        assertEquals(expResult, result, 0.0); 
     }
 
     @Test
     public void testCalculateChange() {
         System.out.println("calculateChange");
-        double cost = 0.0;
-        double amountPayed = 0.0;
-        CashRegister instance = new CashRegister();
-        double expResult = 0.0;
+        double cost = 1000;
+        double amountPayed = 1200;
+        double expResult = 200;
         double result = instance.calculateChange(cost, amountPayed);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult,result,0.0); 
     }
     
 }

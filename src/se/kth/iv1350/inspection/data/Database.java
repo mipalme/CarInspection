@@ -96,7 +96,7 @@ public class Database {
 	}
 	public String saveCurrentResult(String currentCompletedInspection) {
 		for(int i = saveCurrentInspectionCounter; i<inspectionChecklist.length; i++){
-			inspectionsCompleted[i] = currentCompletedInspection;
+			inspectionsCompleted[i] = currentCompletedInspection + " PASS";
 			System.out.println("saving results for-------inspectionNumber "+(i+1)+"--------");
 			System.out.println("inspection Number "+(i+1)+" saved");
 			System.out.println();
@@ -104,7 +104,7 @@ public class Database {
 			break;
 		}
 		finalResults = Arrays.toString(inspectionsCompleted);
-		return Arrays.toString(inspectionsCompleted);
+		return finalResults;
                 //Returns the stringarray as one long string
 	}
 	
