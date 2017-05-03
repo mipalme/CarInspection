@@ -19,17 +19,17 @@ public class View {
 	 * This Vehicles are in queue outside the garage, only one can be inspected at the same time, you choose who!
 	 */
 	 private static String currentVehicleToInspect = "ELF523"; 
-			 										//"ELF523";  Registerd vehical 
-	 											    //"LKF245"	 Registerd vehical
-	 											    //"LDK424"	 Registerd vehical
-	 											    //"NPC999"   Vehical not in database
+                                                                                                    //"ELF523";  Registered vehicle
+	 											    //"LKF245"	 Registered vehicle
+	 											    //"LDK424"	 Registered vehicle
+	 											    //"NPC999"   Vehicle not in database
 	
 	public void testSystemOperations(){
-		//Diffrent SystemOperations.
+		//Different SystemOperations.
 		controller.newInspection(1);//number update display with
 		controller.registerCashPayment(1000, 1200); //what the inspection cost, what the constumer payed
 		controller.verifyVehicle(currentVehicleToInspect); //checks with database if this vehicle exists
-		controller.registerCardPayment(6534, "412 421 465 245", "Felix", 0317, 554, (double) 1000); //creditcard information
+		controller.registerCardPayment(3141, "592 653 589", "Michael", 7932, 384, (double) 6267); //creditcard information
 		controller.fetchNextInspectionAndStoreResults(currentVehicleToInspect); 
 		controller.printCurrentResult(currentVehicleToInspect);
 		
