@@ -92,7 +92,7 @@ public class Controller {
          */
 	public void printCurrentResult(String registrationNumber){
 		Vehicle vehicle = new Vehicle(registrationNumber);
-		String finnalResults = databaseManager.findFinalResult(vehicle);
-		printer.printResult(finnalResults, registrationNumber);	
+		String finalResults = databaseManager.findFinalResult(vehicle);
+		printer.printResult(finalResults, registrationNumber);	
 	}
 }

@@ -18,6 +18,6 @@ public class Garage {
 	 */
 	public void updateDisplay(int number){
 		//updates the display
-		System.out.println("Display have been updated with "+number);
+		System.out.println("Display has been updated with the number: "+number);
 	}
 }

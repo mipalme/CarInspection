@@ -15,7 +15,7 @@ public class DatabaseManager {
 
 	/**
 	 * 
-	 * @param vehicle. Vehicle with a specific registrationNumber is entered to find the correspodning inspections in the database.
+	 * @param vehicle. Vehicle with a specific registrationNumber is entered to find the corresponding inspections in the database.
 	 * @return If there is a inspection for the given vehicle given in (@param) this method will return the cost for the full inspection.
 	 */
 	public double findInspection(Vehicle vehicle){
@@ -23,7 +23,7 @@ public class DatabaseManager {
 	}
 	/**
 	 * 
-	 * @param vehicle. Vehicle with a specific registrationNumber is entered to find the correspodning inspectionCheckList in the database
+	 * @param vehicle. Vehicle with a specific registrationNumber is entered to find the corresponding inspectionCheckList in the database
 	 * @return If there is a inspectionChecklist for the given vehicle the next inspection on that checklist will be returned.
 	 */
 	public String findInspectionChecklist(Vehicle vehicle){
