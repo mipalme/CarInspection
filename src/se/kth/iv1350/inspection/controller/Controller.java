@@ -11,10 +11,11 @@ import se.kth.iv1350.inspection.model.Vehicle;
 import se.kth.iv1350.inspection.model.CreditCard;
 
 
-//Initiates objects that are systems, which the controller has the responsibility 
-//of initiating.
+/**
+ * Controller class which initiates all systems, and also calls all methods from other classes.
+ * 
+ */
 public class Controller {
-
 	CashRegister cashRegister = new CashRegister();
 	Garage garage = new Garage();
 	Printer printer = new Printer();
@@ -22,8 +23,8 @@ public class Controller {
 	PaymentAuthorizationSystem paymentAuthorizationSystem = new PaymentAuthorizationSystem();
 	
 	/**
-         * 
-         * @param number of the customer that should be displayed
+         * Opens the garage door and updates the display if a new customer is about to enter the shop.
+         * @param number Number of the customer that should be displayed.
          */
 	public void newInspection(int number){
 		garage.updateDisplay(number);
@@ -31,28 +32,30 @@ public class Controller {
 		garage.closeDoor();
 	}
 	/**
-         * 
-         * @param cost of the inspection
-         * @param amountPayed
-         * @return 
+         * Creates and prints a new receipt if the customer wants to pay with cash,
+         * (also calculates change).
+         * @param cost Cost of the inspection.
+         * @param amountPayed Amount payed by the customer.
+         * @return Returns the change that the customer should receive.
          */
 	public double registerCashPayment(double cost, double amountPayed){
 		Receipt receipt = new Receipt(cost);
 		printer.printReceipt(receipt);
-		return cashRegister.calculateChange(cost,amountPayed);
-				
+		return cashRegister.calculateChange(cost,amountPayed);			
 	}
         /**
-         * 
-         * @param registrationNumber of the vehicle that is under inspection
-         * @return 
+         * Verifies the vehicle and finds out the cost of the current inspection, also creates a new instance
+         * of the vehicle.
+         * @param registrationNumber The registration number of the vehicle that is under inspection.
+         * @return Returns the cost of the current inspection.
          */
 	public double verifyVehicle(String registrationNumber){
 		Vehicle vehicle = new Vehicle(registrationNumber);
 		return databaseManager.findInspection(vehicle);
 	}
         /**
-         * 
+         * Creates a new credit card instance, creates a receipt with the cost of the inspection, prints the receipt,
+         * and also verifies the payment.
          * @param pin
          * @param number
          * @param holder
@@ -67,9 +70,9 @@ public class Controller {
 		printer.printReceipt(receipt);
 	}
         /**
-         * 
-         * @param registrationNumber of the vehicle that is under inspection
-         * @return 
+         * Finds the next inspection to be made for the current vehicle and stores the result (pass or fail).
+         * @param registrationNumber Registration number of the vehicle that is under inspection
+         * @return Returns the current inspection if there are any left.
          */
 	public String fetchNextInspectionAndStoreResults(String registrationNumber){
 		Vehicle vehicle = new Vehicle(registrationNumber);
@@ -79,16 +82,15 @@ public class Controller {
 		return "No inspections left";
 	}
         /**
-         * 
-         * @param currentCompletedInspection a String containing the completed inspection that was previously made
+         * Stores away the current result.
+         * @param currentCompletedInspection a String containing the completed inspection that was previously made.
          */
 	public void mapCurrentResult(String currentCompletedInspection){
-		databaseManager.storeCurrentResult(currentCompletedInspection);
-		
+		databaseManager.storeCurrentResult(currentCompletedInspection);	
 	}
         /**
-         * 
-         * @param registrationNumber of the vehicle that is under inspection
+         * Prints the result of the total inspection.
+         * @param registrationNumber The registration number of the vehicle that is under inspection
          */
 	public void printCurrentResult(String registrationNumber){
 		Vehicle vehicle = new Vehicle(registrationNumber);
