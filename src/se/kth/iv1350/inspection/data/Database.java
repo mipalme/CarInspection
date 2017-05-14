@@ -2,26 +2,23 @@
 package se.kth.iv1350.inspection.data;
 
 import java.util.Arrays;
-
-import se.kth.iv1350.inspection.integration.Printer;
 import se.kth.iv1350.inspection.model.Vehicle;
-
+/**
+ * This class represents the non-existant database, and is filled with fabricated information about 
+ * various example vehicles and inspections.
+ * 
+ */
 public class Database {
 	
-	public int currentInspectionCounter = 0;
-	public int saveCurrentInspectionCounter = 0;
-
-	public static final double cost = 1000;
+	private int currentInspectionCounter = 0;
+	private int saveCurrentInspectionCounter = 0;
         
-        //An example value for the cost of an inspection. 
-        //It was never specified how the cost is to be caculated, 
-        //so we have just put it as a static number
+	private final double cost = 1000;
 	
-	Vehicle vehicle = new Vehicle("ELF523");
-	Vehicle vehicle1 = new Vehicle("LKF245");
-	Vehicle vehicle2 = new Vehicle("LDK424");
+	private final Vehicle vehicle = new Vehicle("ELF523");
+	private final Vehicle vehicle1 = new Vehicle("LKF245");
+	private final Vehicle vehicle2 = new Vehicle("LDK424");
         
-        //Three example vehicles.
 	
 	private final String[] inspectionChecklist = {"check oil","check windows","check lights"};
 	private final String[] inspectionChecklist1 = {"check oil","check seats","check wheels"};
@@ -35,7 +32,11 @@ public class Database {
         //All of these are example inspections for the example vehicles.
 	
 	private String finalResults;
-       
+        /**
+         * Fetches the cost of the inspections to be made for a specific vehicle.
+         * @param vehicle Vehicle which is to be inspected.
+         * @return The cost of the inspection, if there are any inspections found.
+         */
 	public double fetchInspection(Vehicle vehicle){
 		if(this.vehicle.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
 			System.out.println("inspections found! Your cost is: "+cost);
@@ -52,8 +53,13 @@ public class Database {
 		else
 			return 0;
 	}
-          //Checks if the vehicles registration number is the same as one in the database,
-          //Then lists the inspections to be made and works through them, while returning the next inspection each time.     
+        /**
+         * Checks if the vehicles registration number is the same as one in the database
+         * then lists the inspections to be made and works through them,
+         * while returning the next inspection each time.  
+         * @param vehicle Vehicle to be inspected.
+         * @return The current inspection in the form of a string.
+         */   
 	public String fetchInspectionChecklist(Vehicle vehicle){
 		
 		if(this.vehicle.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
@@ -91,9 +97,14 @@ public class Database {
 		}
 		else
 			System.out.println(Arrays.toString(noCheckListFound));
-			return  Arrays.toString(noCheckListFound);
+			return Arrays.toString(noCheckListFound);
 		
 	}
+        /**
+         * Saves the result of the current inspection (always pass since dummy class).
+         * @param currentCompletedInspection Name of the inspection to be saved.
+         * @return An updated list of all the completed inspections so far.
+         */
 	public String saveCurrentResult(String currentCompletedInspection) {
 		for(int i = saveCurrentInspectionCounter; i<inspectionChecklist.length; i++){
 			inspectionsCompleted[i] = currentCompletedInspection + " PASS";
@@ -107,7 +118,11 @@ public class Database {
 		return finalResults;
                 //Returns the stringarray as one long string
 	}
-	
+	/**
+         * Finds the final results of the specified vehicle.
+         * @param vehicle The specified vehicle.
+         * @return Final results (all the completed inspections done with results).
+         */
 	public String collectFinalResults(Vehicle vehicle){
 		if(this.vehicle.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
 			return finalResults;
