@@ -36,37 +36,50 @@ public class Database {
          * Fetches the cost of the inspections to be made for a specific vehicle.
          * @param vehicle Vehicle which is to be inspected.
          * @return The cost of the inspection, if there are any inspections found.
+         * @throws InvalidVehicleException if the registration number is not found.
          */
-	public double fetchInspection(Vehicle vehicle){
+	public double fetchInspection(Vehicle vehicle) throws InvalidVehicleException{
 		if(this.vehicle.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
-			System.out.println("inspections found! Your cost is: "+cost);
 			return cost;
 		}
 		if(this.vehicle1.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
-			System.out.println("inspections found! Your cost is: "+cost);
 			return cost;
 		} 
 		if(this.vehicle2.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
-			System.out.println("inspections found! Your cost is: "+cost);
 			return cost;
 		}
 		else
-			return 0;
+			throw new InvalidVehicleException(vehicle.getRegistrationNumber());
 	}
         /**
+         * Finds the list of inspections to be made for specific vehicle.
+         * @param vehicle The vehicle under inspection.
+         * @return All inspections to be made on the vehicle.
+         */
+        public String fetchInspectionChecklist(Vehicle vehicle){
+            if(this.vehicle.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
+                return Arrays.toString(inspectionChecklist);
+            }
+            if(this.vehicle1.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
+                return Arrays.toString(inspectionChecklist1);
+            }
+            if(this.vehicle2.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
+                return Arrays.toString(inspectionChecklist2);
+            }
+            return "No inspections found";
+        } 
+        /**
          * Checks if the vehicles registration number is the same as one in the database
-         * then lists the inspections to be made and works through them,
+         * then works through the inspections to be made,
          * while returning the next inspection each time.  
          * @param vehicle Vehicle to be inspected.
          * @return The current inspection in the form of a string.
          */   
-	public String fetchInspectionChecklist(Vehicle vehicle){
+	public String fetchNextInspection(Vehicle vehicle){
 		
 		if(this.vehicle.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
-			System.out.println("Your inspections are: "+ Arrays.toString(inspectionChecklist));
 			for(int i = currentInspectionCounter;i < inspectionChecklist.length; i++){
 				String nextInspection = inspectionChecklist[i];
-				System.out.println("The next Inspection is: "+nextInspection);
 				System.out.println("working on--------"+nextInspection+"--------");
 				currentInspectionCounter++;
 				return nextInspection;          
@@ -74,10 +87,8 @@ public class Database {
 			return "No more inspections left";
 		}
 		if(this.vehicle1.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
-			System.out.println("Your inspections are: "+ Arrays.toString(inspectionChecklist1));
 			for(int i = currentInspectionCounter;i < inspectionChecklist1.length; i++){
 				String nextInspection = inspectionChecklist1[i];
-				System.out.println("The next Inspection is: "+nextInspection);
 				System.out.println("working on--------"+nextInspection+"--------");
 				currentInspectionCounter++;
 				return nextInspection;
@@ -85,10 +96,8 @@ public class Database {
 			return "No more inspections left";
 		}
 		if(this.vehicle2.getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
-			System.out.println("Your inspections are: "+ Arrays.toString(inspectionChecklist2));
 			for(int i = currentInspectionCounter;i < inspectionChecklist2.length; i++){
 				String nextInspection = inspectionChecklist2[i];
-				System.out.println("The next Inspection is: "+nextInspection);
 				System.out.println("working on--------"+nextInspection+"--------");
 				currentInspectionCounter++;
 				return nextInspection;
