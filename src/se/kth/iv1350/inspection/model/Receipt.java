@@ -13,13 +13,13 @@ public class Receipt {
 	 * @param cost. The cost for the full inspection.
 	 */
 	public Receipt(double cost){
-		
+	this.cost = cost;	
 	}
 	/**
 	 * 
 	 * @return The cost for the full inspection.
 	 */
 	public double getCost() {
-		return cost;
+            return cost;
 	}
 }
