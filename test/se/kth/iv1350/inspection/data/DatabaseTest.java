@@ -30,7 +30,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void testFetchInspection() {
+    public void testFetchInspection() throws InvalidVehicleException {
         System.out.println("fetchInspection");
         double expResult = cost;
         double result = instance.fetchInspection(vehicle);
