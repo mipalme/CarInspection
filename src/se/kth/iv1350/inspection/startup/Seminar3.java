@@ -19,12 +19,13 @@ public class Seminar3 {
 		 * Creates a new instance of the controller object and view object.
 		 */
 		Controller controller = new Controller();
-		View view = new View(controller);
-		
+                View view = new View(controller);
 		/**
-		 * Different system operations that will be tested. 
-		 */
-		view.testSystemOperations();
+		 * Different system operations that will be tested.
+		 */                             
+                view.testSystemOperations();
+                
+		
 	}
 
 }
