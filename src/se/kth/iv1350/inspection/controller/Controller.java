@@ -9,6 +9,7 @@ import se.kth.iv1350.inspection.integration.Printer;
 import se.kth.iv1350.inspection.model.Receipt;
 import se.kth.iv1350.inspection.model.Vehicle;
 import se.kth.iv1350.inspection.model.CreditCard;
+import se.kth.iv1350.inspection.data.InvalidVehicleException;
 
 
 /**
@@ -48,8 +49,9 @@ public class Controller {
          * of the vehicle.
          * @param registrationNumber The registration number of the vehicle that is under inspection.
          * @return Returns the cost of the current inspection.
+         * @throws InvalidVehicleException if no vehicle with given registration number is found.
          */
-	public double verifyVehicle(String registrationNumber){
+	public double verifyVehicle(String registrationNumber) throws InvalidVehicleException{
 		Vehicle vehicle = new Vehicle(registrationNumber);
 		return databaseManager.findInspection(vehicle);
 	}
@@ -62,13 +64,23 @@ public class Controller {
          * @param expireDate
          * @param CVC
          * @param cost 
+         * @return If the payment was approved.
          */
-	public void registerCardPayment(int pin, String number, String holder, int expireDate, int CVC, Double cost){
+	public boolean registerCardPayment(int pin, String number, String holder, int expireDate, int CVC, Double cost){
 		CreditCard creditCard = new CreditCard(pin, number, holder, expireDate, CVC);
 		Receipt receipt = new Receipt(cost);
-		paymentAuthorizationSystem.requestPayment(creditCard, cost);
 		printer.printReceipt(receipt);
+                return paymentAuthorizationSystem.requestPayment(creditCard, cost);
 	}
+        /**
+         * Finds the list of inspections associated with the current vehicle.
+         * @param registrationNumber The registration number of the vehicle in question.
+         * @return The list of inspections.
+         */
+        public String findInspectionChecklist(String registrationNumber){
+            Vehicle vehicle = new Vehicle(registrationNumber);
+            return databaseManager.getInspectionChecklist(vehicle);
+        }
         /**
          * Finds the next inspection to be made for the current vehicle and stores the result (pass or fail).
          * @param registrationNumber Registration number of the vehicle that is under inspection
