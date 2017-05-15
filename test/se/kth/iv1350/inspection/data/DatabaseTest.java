@@ -13,7 +13,7 @@ public class DatabaseTest {
     
     public DatabaseTest() {
     }
-    private static double cost = 1000;
+    private final double cost = 1000;
     Vehicle vehicle;
     Database instance;
     
