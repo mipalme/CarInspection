@@ -57,5 +57,4 @@ public class DatabaseManager {
 	public String findFinalResult(Vehicle vehicle){
 		return database.collectFinalResults(vehicle);
 	}
-
 }
