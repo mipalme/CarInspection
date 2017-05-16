@@ -1,7 +1,7 @@
 package se.kth.iv1350.inspection.view;
 
 import se.kth.iv1350.inspection.controller.Controller;
-import se.kth.iv1350.inspection.data.InvalidVehicleException;
+import se.kth.iv1350.inspection.model.InvalidVehicleException;
 import se.kth.iv1350.inspection.util.LogHandler;
 import java.io.IOException;
 
@@ -13,8 +13,9 @@ import java.io.IOException;
 public class View {
 	
 	private final Controller controller;
-        private final String currentVehicleToInspect = "ELF524";
+        private final String currentVehicleToInspect = "ELF523";
         LogHandler logger;
+        InspectionStatsView inspectionstatsview;
        
 	/**
 	 * Initiates an instance of the object controller, also checks for IOException,
@@ -25,7 +26,7 @@ public class View {
 	public View(Controller controller){
 		this.controller = controller; 
                 try{
-                     logger = new LogHandler();
+                    logger = new LogHandler();
                 }
                 catch (IOException e){
                     logger = null;
