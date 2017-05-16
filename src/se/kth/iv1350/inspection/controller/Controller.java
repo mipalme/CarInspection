@@ -9,7 +9,8 @@ import se.kth.iv1350.inspection.integration.Printer;
 import se.kth.iv1350.inspection.model.Receipt;
 import se.kth.iv1350.inspection.model.Vehicle;
 import se.kth.iv1350.inspection.model.CreditCard;
-import se.kth.iv1350.inspection.data.InvalidVehicleException;
+import se.kth.iv1350.inspection.model.InvalidVehicleException;
+import se.kth.iv1350.inspection.model.Inspection;
 
 
 /**
@@ -22,6 +23,7 @@ public class Controller {
 	Printer printer = new Printer();
 	DatabaseManager databaseManager = new DatabaseManager();
 	PaymentAuthorizationSystem paymentAuthorizationSystem = new PaymentAuthorizationSystem();
+        Inspection inspection = new Inspection();
 	
 	/**
          * Opens the garage door and updates the display if a new customer is about to enter the shop.
@@ -53,7 +55,7 @@ public class Controller {
          */
 	public double verifyVehicle(String registrationNumber) throws InvalidVehicleException{
 		Vehicle vehicle = new Vehicle(registrationNumber);
-		return databaseManager.findInspection(vehicle);
+		return inspection.fetchInspection(vehicle);
 	}
         /**
          * Creates a new credit card instance, creates a receipt with the cost of the inspection, prints the receipt,
@@ -79,7 +81,7 @@ public class Controller {
          */
         public String findInspectionChecklist(String registrationNumber){
             Vehicle vehicle = new Vehicle(registrationNumber);
-            return databaseManager.getInspectionChecklist(vehicle);
+            return inspection.checklistReturn(vehicle);
         }
         /**
          * Finds the next inspection to be made for the current vehicle and stores the result (pass or fail).
@@ -88,8 +90,8 @@ public class Controller {
          */
 	public String fetchNextInspectionAndStoreResults(String registrationNumber){
 		Vehicle vehicle = new Vehicle(registrationNumber);
-		for(int i = 0; i <3; i++){
-			mapCurrentResult(databaseManager.findInspectionChecklist(vehicle));
+		for(int i = 0; i <3; i++){ 
+			mapCurrentResult(inspection.fetchNextInspection(vehicle));
 		}
 		return "No inspections left";
 	}
@@ -98,7 +100,7 @@ public class Controller {
          * @param currentCompletedInspection a String containing the completed inspection that was previously made.
          */
 	public void mapCurrentResult(String currentCompletedInspection){
-		databaseManager.storeCurrentResult(currentCompletedInspection);	
+		inspection.saveCurrentResult(currentCompletedInspection);	
 	}
         /**
          * Prints the result of the total inspection.
@@ -106,7 +108,7 @@ public class Controller {
          */
 	public void printCurrentResult(String registrationNumber){
 		Vehicle vehicle = new Vehicle(registrationNumber);
-		String finalResults = databaseManager.findFinalResult(vehicle);
+		String finalResults = inspection.collectFinalResults(vehicle);
 		printer.printResult(finalResults, registrationNumber);	
 	}
 }
