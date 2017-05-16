@@ -23,6 +23,6 @@ public class Seminar3 {
 		/**
 		 * Different system operations that will be tested.
 		 */                             
-                view.testSystemOperations();         	
+                view.testSystemOperations();           	
 	}
 }
