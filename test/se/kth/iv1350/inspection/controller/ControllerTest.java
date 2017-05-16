@@ -2,7 +2,7 @@
 package se.kth.iv1350.inspection.controller;
 import se.kth.iv1350.inspection.model.Vehicle;
 import se.kth.iv1350.inspection.model.CreditCard;
-import se.kth.iv1350.inspection.data.InvalidVehicleException;
+import se.kth.iv1350.inspection.model.InvalidVehicleException;
 
 import org.junit.After;
 import org.junit.AfterClass;
