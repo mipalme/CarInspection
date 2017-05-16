@@ -21,6 +21,6 @@ public class Printer {
 	 * @param registrationNumber. The registration number of the inspected vehicle.
 	 */
 	public void printResult(String finalInspectionResult, String registrationNumber){
-		System.out.println("All results for the inspections :"+finalInspectionResult+" has been printed for Vehicle: " +registrationNumber+".");
+		System.out.println("All results for the inspections :"+finalInspectionResult+" have been printed for Vehicle: " +registrationNumber+".");
 	}
 }
