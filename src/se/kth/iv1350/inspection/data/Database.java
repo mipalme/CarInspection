@@ -3,6 +3,8 @@ package se.kth.iv1350.inspection.data;
 
 import java.util.Arrays;
 import se.kth.iv1350.inspection.model.Vehicle;
+import se.kth.iv1350.inspection.integration.Observer;
+import se.kth.iv1350.inspection.view.InspectionStatsView;
 /**
  * This class represents the non-existant database, and is filled with fabricated information about 
  * various example vehicles and inspections.
@@ -12,6 +14,8 @@ public class Database {
 	
 	private int currentInspectionCounter = 0;
 	private int saveCurrentInspectionCounter = 0;
+        private String result = "PASS";
+        private Observer observer = new InspectionStatsView();
         
 	private final double cost = 1000;
 	
@@ -116,7 +120,8 @@ public class Database {
          */
 	public String saveCurrentResult(String currentCompletedInspection) {
 		for(int i = saveCurrentInspectionCounter; i<inspectionChecklist.length; i++){
-			inspectionsCompleted[i] = currentCompletedInspection + " PASS";
+			inspectionsCompleted[i] = currentCompletedInspection + result;
+                        observer.CountPassOrFail(result);
 			System.out.println("saving results for-------inspectionNumber "+(i+1)+"--------");
 			System.out.println("inspection Number "+(i+1)+" saved");
 			System.out.println();
