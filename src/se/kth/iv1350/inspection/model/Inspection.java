@@ -32,12 +32,15 @@ public class Inspection {
          */
 	public double verifyVehicleAndGetCost(Vehicle vehicle) throws InvalidVehicleException{
 		if(this.databaseManager.retrieveRegisteredVehicles()[0].getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
+                        System.out.println(vehicle.getDriveType());
 			return databaseManager.retrieveCost();
 		}
 		if(this.databaseManager.retrieveRegisteredVehicles()[1].getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
+                        System.out.println(vehicle.getDriveType());
 			return databaseManager.retrieveCost();
 		} 
 		if(this.databaseManager.retrieveRegisteredVehicles()[2].getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
+                        System.out.println(vehicle.getDriveType());
 			return databaseManager.retrieveCost();
 		}
 		else
