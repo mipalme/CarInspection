@@ -6,7 +6,7 @@ import se.kth.iv1350.inspection.model.Vehicle;
 import se.kth.iv1350.inspection.model.InvalidVehicleException;
 
 /**
- * This class serves as the middleman between database and controller, it is the only class
+ * This class serves as the middleman between database and inspection, it is the only class
  * that calls from the database.
  *
  */
@@ -36,12 +36,18 @@ public class DatabaseManager {
         public double retrieveCost(){
             return database.getCost();
         }
-        public void saveCurrentResult(String[] result){
+        /**
+         * Stores away the current results in the database.
+         * @param result The current results.
+         */
+        public void storeCurrentResult(String[] result){
             database.saveResults(result);
         }
+        /**
+         * Retrieve the final results from the database.
+         * @return The final results.
+         */
         public String retrieveFinalResults(){
             return database.getResults();
         }
-        
-
 }
