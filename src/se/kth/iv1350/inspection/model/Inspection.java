@@ -24,12 +24,13 @@ public class Inspection {
 	private final String[] inspectionsCompleted2 = new String[databaseManager.retrieveInspectionChecklists().length];
  
         /**
-         * Fetches the cost of the inspections to be made for a specific vehicle.
+         * Fetches the cost of the inspections to be made for a specific vehicle
+         * as well as checks if the vehicle exists in the database.
          * @param vehicle Vehicle which is to be inspected.
          * @return The cost of the inspection, if there are any inspections found.
          * @throws InvalidVehicleException if the registration number is not found.
          */
-	public double fetchInspection(Vehicle vehicle) throws InvalidVehicleException{
+	public double verifyVehicleAndGetCost(Vehicle vehicle) throws InvalidVehicleException{
 		if(this.databaseManager.retrieveRegisteredVehicles()[0].getRegistrationNumber().equals(vehicle.getRegistrationNumber())){
 			return databaseManager.retrieveCost();
 		}
@@ -43,9 +44,9 @@ public class Inspection {
 			throw new InvalidVehicleException(vehicle.getRegistrationNumber());
 	}
         /**
-         * Finds the list of inspections to be made for specific vehicle.
+         * Finds the next inspection to be made for a vehicle.
          * @param vehicle The vehicle under inspection.
-         * @return All inspections to be made on the vehicle.
+         * @return The next inspection that is on the checklist of the vehicle.
          */
         public String fetchNextInspection(Vehicle vehicle){
            for(int i = 0; i < databaseManager.retrieveRegisteredVehicles().length; i++){
@@ -60,6 +61,11 @@ public class Inspection {
 		}
 		return  "No inspections found";
         } 
+        /**
+         * Returns the entire checklist of inspections for a single vehicle.
+         * @param vehicle the vehicle under inspection.
+         * @return The inspection checklist for the vehicle.
+         */
         public String checklistReturn(Vehicle vehicle){
 		for(int i = 0; i < databaseManager.retrieveRegisteredVehicles().length; i++){
 			if(vehicle.getRegistrationNumber().equals(databaseManager.retrieveRegisteredVehicles()[i].getRegistrationNumber())){
@@ -71,23 +77,20 @@ public class Inspection {
         }
       
         /**
-         * Saves the result of the current inspection (always pass since dummy class).
+         * Saves the result of the current inspection (always pass since no real inspector exists).
          * @param currentCompletedInspection Name of the inspection to be saved.
-         * @return An updated list of all the completed inspections so far.
          */
-	public String saveCurrentResult(String currentCompletedInspection) {
+	public void saveCurrentResult(String currentCompletedInspection) {
 		for(int i = saveCurrentInspectionCounter; i<databaseManager.retrieveInspectionChecklists().length; i++){
 			inspectionsCompleted[i] = currentCompletedInspection + " "+result;
-                        observer.CountPassOrFail(result);
+                        observer.countPassOrFail(result);
 			System.out.println("saving results for-------inspectionNumber "+(i+1)+"--------");
 			System.out.println("inspection Number "+(i+1)+" saved");
 			System.out.println();
 			saveCurrentInspectionCounter++;
 			break;
 		}
-                databaseManager.saveCurrentResult(inspectionsCompleted);
-                return Arrays.toString(inspectionsCompleted);
-                             
+                databaseManager.storeCurrentResult(inspectionsCompleted);                                    
 	}
 	/**
          * Finds the final results of the specified vehicle.
