@@ -6,6 +6,21 @@ package se.kth.iv1350.inspection.integration;
  * 
  */
 public class Garage {
+        private static Garage firstInstance = null;
+    
+        private Garage(){}
+        /**
+        * Checks is an instance of the object already exists, returns an instance of the object
+        * of no such object exists currently (singleton).
+        * @return An instance of the object.
+        */
+        public static Garage getInstance(){
+        
+        if(firstInstance == null){
+            firstInstance = new Garage();
+        }
+        return firstInstance;
+    } 
 	/**
          * Opens the garage door.
          */
