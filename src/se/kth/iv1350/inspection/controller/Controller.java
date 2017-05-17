@@ -19,7 +19,7 @@ import se.kth.iv1350.inspection.model.Inspection;
  */
 public class Controller {
 	CashRegister cashRegister = new CashRegister();
-	Garage garage = new Garage();
+	Garage garage = Garage.getInstance();
 	Printer printer = new Printer();
 	DatabaseManager databaseManager = new DatabaseManager();
 	PaymentAuthorizationSystem paymentAuthorizationSystem = new PaymentAuthorizationSystem();
@@ -55,7 +55,7 @@ public class Controller {
          */
 	public double verifyVehicle(String registrationNumber) throws InvalidVehicleException{
 		Vehicle vehicle = new Vehicle(registrationNumber);
-		return inspection.fetchInspection(vehicle);
+		return inspection.verifyVehicleAndGetCost(vehicle);
 	}
         /**
          * Creates a new credit card instance, creates a receipt with the cost of the inspection, prints the receipt,
