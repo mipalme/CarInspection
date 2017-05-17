@@ -4,15 +4,18 @@ package se.kth.iv1350.inspection.view;
 import se.kth.iv1350.inspection.integration.Observer;
 
 /**
- *  Displays the total amount of passed or failed inspections.
+ *  Counts and displays the total amount of passed or failed inspections.
  * 
  */
 public class InspectionStatsView implements Observer {
     int inspectionsPassed = 0;
     int inspectionsFailed = 0;
-    
-    public void CountPassOrFail (String result){
-            
+    /**
+     * Keeps track of how many PASS or FAIL results
+     * have been scored so far.
+     * @param result The result of a single inspection, containing one PASS or FAIL.
+     */
+    public void countPassOrFail (String result){      
             if (result.equals("PASS")){
                 inspectionsPassed++;
             }
