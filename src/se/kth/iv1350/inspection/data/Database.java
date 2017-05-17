@@ -27,8 +27,10 @@ public class Database {
 	private final String[] inspectionsCompleted2 = new String[inspectionChecklist.length];
         
         private String finalResults;
-        
-        //All of these are example inspections for the example vehicles.
+        /**
+         * Forwards the inspection checklists that are stored in this database.
+         * @return The inspection checklists.
+         */
         public String[][] getInspectionChecklists(){
             String[][] checklists = new String[3][3];
             checklists[0] = inspectionChecklist;
@@ -36,7 +38,10 @@ public class Database {
             checklists[2] = inspectionChecklist2;
             return checklists;
         }
-        
+        /**
+         * Forwards the registered vehicles that are stored in the database.
+         * @return The registered vehicles.
+         */
         public Vehicle[] getRegisteredVehicles(){
             Vehicle[] vehicles = new Vehicle[3];
             vehicles[0] = vehicle;
@@ -44,19 +49,26 @@ public class Database {
             vehicles[2] = vehicle2;
             return vehicles;   
         }
-        
+        /**
+         * Forwards the cost of the inspections for the vehicles that
+         * are stored in this database.
+         * @return The cost of the inspections.
+         */
         public double getCost(){
             return cost;
         }
+        /**
+         * Stores the results of an inspection in the database.
+         * @param results The results of a specific inspection (pass or fail).
+         */
         public void saveResults(String[] results){
             finalResults = Arrays.toString(results);
         }
+        /**
+         * Forwards the results previously stored in the database.
+         * @return The results stored in "saveResults".
+         */
         public String getResults(){
             return finalResults;
-        }
-        
-        
-               
-	
-	
+        }	
 }
