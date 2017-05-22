@@ -11,6 +11,7 @@ import se.kth.iv1350.inspection.model.Vehicle;
 import se.kth.iv1350.inspection.model.CreditCard;
 import se.kth.iv1350.inspection.model.InvalidVehicleException;
 import se.kth.iv1350.inspection.model.Inspection;
+import se.kth.iv1350.inspection.view.InspectionStatsView;
 
 
 /**
@@ -24,6 +25,7 @@ public class Controller {
 	DatabaseManager databaseManager = new DatabaseManager();
 	PaymentAuthorizationSystem paymentAuthorizationSystem = new PaymentAuthorizationSystem();
         Inspection inspection = new Inspection();
+        InspectionStatsView observer;
 	
 	/**
          * Opens the garage door and updates the display if a new customer is about to enter the shop.
@@ -100,6 +102,7 @@ public class Controller {
          * @param currentCompletedInspection a String containing the completed inspection that was previously made.
          */
 	public void mapCurrentResult(String currentCompletedInspection){
+                inspection.addObserver(observer);
 		inspection.saveCurrentResult(currentCompletedInspection);	
 	}
         /**
@@ -111,4 +114,11 @@ public class Controller {
 		String finalResults = inspection.collectFinalResults(vehicle);
 		printer.printResult(finalResults, registrationNumber);	
 	}
+        /**
+         * Adds an observer that gets notified when an inspection result has been updated.
+         * @param observer The observer that gets notified.
+         */
+        public void addObserver(InspectionStatsView observer){
+            this.observer = observer;
+        }
 }
