@@ -2,7 +2,6 @@
 package se.kth.iv1350.inspection.model;
 
 import java.util.Arrays;
-import se.kth.iv1350.inspection.integration.Observer;
 import se.kth.iv1350.inspection.view.InspectionStatsView;
 import se.kth.iv1350.inspection.integration.DatabaseManager;
 /**
