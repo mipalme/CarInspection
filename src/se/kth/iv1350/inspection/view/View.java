@@ -39,6 +39,7 @@ public class View {
 	public void testSystemOperations (){
 		//Different SystemOperations.
                 try{
+                    controller.addObserver(new InspectionStatsView());
                     controller.newInspection(1);//number to update display with.
                     controller.registerCashPayment(1000, 1200); //what the inspection costs, what the constumer payed.
                     System.out.println("Inspections found! The cost of the inspections are: "+controller.verifyVehicle(currentVehicleToInspect)+"$"); //checks with database if this vehicle exists.
