@@ -16,7 +16,7 @@ public class Inspection {
         private int currentInspectionCounter = 0;
 	private int saveCurrentInspectionCounter = 0;
         private String result = "PASS";
-        private Observer observer = new InspectionStatsView();	
+        private InspectionStatsView observer;	
 	private String finalResults;
                     
         private final String[] inspectionsCompleted = new String[databaseManager.retrieveInspectionChecklists().length];
@@ -86,7 +86,7 @@ public class Inspection {
 	public void saveCurrentResult(String currentCompletedInspection) {
 		for(int i = saveCurrentInspectionCounter; i<databaseManager.retrieveInspectionChecklists().length; i++){
 			inspectionsCompleted[i] = currentCompletedInspection + " "+result;
-                        observer.countPassOrFail(result);
+                        notifyObserver(result);
 			System.out.println("saving results for-------inspectionNumber "+(i+1)+"--------");
 			System.out.println("inspection Number "+(i+1)+" saved");
 			System.out.println();
@@ -112,4 +112,14 @@ public class Inspection {
 		}
 		return "No results found";
 	}
+        private void notifyObserver(String result){
+            this.observer.countPassOrFail(result);
+        }
+        /**
+         * Adds an observer.
+         * @param observer The observer.
+         */
+        public void addObserver(InspectionStatsView observer){
+            this.observer = observer;
+        }
 }
